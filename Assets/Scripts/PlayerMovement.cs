@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using TouchScript;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
@@ -8,7 +9,7 @@ public class PlayerMovement : MonoBehaviour {
 	public float waittime = 2.5f;
 	protected bool iswaiting = false;
 	public bool button;
-
+	public GameObject player;
 
 	public float rotspeed = 6f;
 	public float speed = 6f;    
@@ -19,7 +20,6 @@ public class PlayerMovement : MonoBehaviour {
 	float camRayLength = 1000f;    
 	Ray camRay;
 	bool aim;
-
 
 	void OnDrawGizmosSelected()
 	{
@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Start()
 	{
 		TouchInputManager.PassInputToLayout (LayoutID.Main, true);
-		//TouchInputManager.RenderLayout (LayoutID.Main, true);
+		TouchInputManager.RenderLayout (LayoutID.Main, true);
 
 	}
 	
@@ -46,19 +46,30 @@ public class PlayerMovement : MonoBehaviour {
 	void FixedUpdate ()
 	{
 	
-		Turning ();
-
+		//Turning ();
+		//lookat ();
 
 	}
 
 	void Update()
 	{
-
+		readjoy ();
 		getinput ();
-
+	
 
 	}
+
+	void readjoy()
+	{
+		Vector2 joystick = TouchInputManager.GetJoystick (InputID.Rotate, LayoutID.Main);
+
+		float angle = Mathf.Atan2 (joystick.x , joystick.y ) * Mathf.Rad2Deg;
+		print (angle);
+		if (angle != 0)
+			turn (angle);
 	
+	}
+
 	void Move (float h, float v)
 	{
 		movement.Set (h, 0f, v);
@@ -67,32 +78,35 @@ public class PlayerMovement : MonoBehaviour {
 		
 		playerRigidbody.MovePosition (transform.position + movement);
 	}
-	
+
+	void turn(float angl)
+	{
+		transform.eulerAngles = new Vector3 (0, angl, 0);
+	}
 	void Turning ()
 	{	
 
-		if(Input.touchCount>0)
-		{
+		if (Input.touchCount > 0) {
 
-				camRay = Camera.main.ScreenPointToRay (Input.GetTouch(0).position);
-				//print(Input.GetTouch(i).position);
+			camRay = Camera.main.ScreenPointToRay (Input.GetTouch(0).position);
+			//print(Input.GetTouch(i).position);
 
-				RaycastHit floorHit;
+			RaycastHit floorHit;
 
-			if (Physics.Raycast (camRay, out floorHit, camRayLength, floorMask))
-				{
+			if (Physics.Raycast (camRay, out floorHit, camRayLength, floorMask)) {
 				Vector3 playerToMouse = floorHit.point - transform.position;
+				playerToMouse.y = 0f;
 
-				//playerToMouse.y = 0f;
 
 				Quaternion newRotation = Quaternion.LookRotation (playerToMouse);
-
 				//playerRigidbody.MoveRotation (newRotation);
-				 playerRigidbody.transform.rotation = Quaternion.Lerp ( transform.rotation , newRotation , rotspeed );
-
-			}
+				playerRigidbody.transform.rotation = Quaternion.Lerp (transform.rotation, newRotation, rotspeed);
+				
 			}
 		}
+
+	}
+
 		
 	
 
@@ -157,9 +171,6 @@ public class PlayerMovement : MonoBehaviour {
 		
 		newarrow = Instantiate (arrow, position, rotation) as GameObject;
 		
-
-		
-		
 	}
 	
 
@@ -207,7 +218,20 @@ public class PlayerMovement : MonoBehaviour {
 			}
 		}*/
 					
-	
+void lookat()
+	{
+		int tapCount = Input.touchCount;
+		if(tapCount > 0)
+		{
+			print ("calling");
+			Vector3 touch = Input.GetTouch(0).position;
+			Vector3 screen = Camera.main.ScreenToWorldPoint(touch);//new Vector3(touch.x, touch.y, Camera.main.nearClipPlane + 5.0f));
+			Vector3 lookPos = screen - player.transform.position;
+			lookPos.y = 0;
+			var rot = Quaternion.LookRotation(lookPos); // now get the desired rotation
+			player.transform.rotation = Quaternion.Lerp(player.transform.rotation, rot, rotspeed * Time.deltaTime);
+		}
+	}
 	
 
 

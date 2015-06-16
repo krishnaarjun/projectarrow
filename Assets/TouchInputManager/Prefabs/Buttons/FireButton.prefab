@@ -103,7 +103,7 @@ MonoBehaviour:
   topPartLayer: 1
   basePart: {fileID: 11400006}
   topPart: {fileID: 11400004}
-  recenterBaseOnRelease: 2
+  recenterBaseOnRelease: 0
   recenterBaseMethodValue: 0
   scale: .0799999982
 --- !u!114 &11400002
@@ -144,31 +144,6 @@ MonoBehaviour:
       transitionColor: {r: 1, g: 1, b: 1, a: 1}
       changeToTexture: {fileID: 2800000, guid: 1fea6602386bb534bb62d8c216340485, type: 3}
       changeToSize: .125
-  - presetID: NewAnim_1
-    unlatchedAnimationTop:
-      transitionMethod: 0
-      transitionMethodValue: 0
-      transitionColor: {r: 1, g: 1, b: 1, a: 1}
-      changeToTexture: {fileID: 2800000, guid: da8154ec559543940840395de8e0b29b, type: 3}
-      changeToSize: 0
-    unlatchedAnimationBase:
-      transitionMethod: 0
-      transitionMethodValue: 0
-      transitionColor: {r: 1, g: 1, b: 1, a: 1}
-      changeToTexture: {fileID: 2800000, guid: 1fea6602386bb534bb62d8c216340485, type: 3}
-      changeToSize: 0
-    latchedAnimationTop:
-      transitionMethod: 0
-      transitionMethodValue: 0
-      transitionColor: {r: 1, g: 1, b: 1, a: 1}
-      changeToTexture: {fileID: 2800000, guid: da8154ec559543940840395de8e0b29b, type: 3}
-      changeToSize: 0
-    latchedAnimationBase:
-      transitionMethod: 0
-      transitionMethodValue: 0
-      transitionColor: {r: 1, g: 1, b: 1, a: 1}
-      changeToTexture: {fileID: 2800000, guid: 1fea6602386bb534bb62d8c216340485, type: 3}
-      changeToSize: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

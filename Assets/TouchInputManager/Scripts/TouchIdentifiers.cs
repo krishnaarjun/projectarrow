@@ -5,4 +5,5 @@ public enum LayoutID
 public enum InputID
 {
     Fire = 0,
+    Rotate = 1,
 }
