@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using TouchScript;
 using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
