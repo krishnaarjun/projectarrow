@@ -33,9 +33,9 @@ public class Arrow : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter(Collision collision)
+	void OnTriggerEnter(Collider collision)
 	{
-		print ("calling");
+		//print ("calling");
 		if (collision.gameObject.tag == "Enemy")
 		{
 			print ("hit enemy");

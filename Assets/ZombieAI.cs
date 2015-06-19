@@ -25,5 +25,8 @@ public class ZombieAI : MonoBehaviour {
 	void Update () 
 	{
 		navmesh.SetDestination (Player.position);
+
 	}
+
+
 }

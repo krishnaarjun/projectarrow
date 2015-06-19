@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour {
 		Vector2 joystick = TouchInputManager.GetJoystick (InputID.Rotate, LayoutID.Main);
 
 		float angle = Mathf.Atan2 (joystick.x , joystick.y ) * Mathf.Rad2Deg;
-		print (angle);
+
 		if (angle != 0)
 			turn (angle);
 	
@@ -123,6 +123,10 @@ public class PlayerMovement : MonoBehaviour {
 			{
 				//Animating (false);
 			}
+			if (TouchInputManager.GetButton (InputID.Melee,LayoutID.Main))
+			{
+				AnimateMelee(true);
+			}
 		} 
 		else
 		{
@@ -156,10 +160,16 @@ public class PlayerMovement : MonoBehaviour {
 
 			aim = value;
 			anim.SetBool ("IsAiming", aim);
-			print (aim);
+			//print (aim);
 
 
 	}
+
+	void AnimateMelee(bool value)
+	{
+		anim.SetBool ("melee", value);
+	}
+
 	void fire(int i)
 	{
 		Vector3 position = muzzlepoint.position;
@@ -180,43 +190,19 @@ public class PlayerMovement : MonoBehaviour {
 		aim = false;
 
 		anim.SetBool("IsAiming", aim);
-		print ("event executed");
+		//print ("event executed");
+	}
+
+	void reset(float b)
+	{
+		print ("calling");
+		anim.SetBool ("melee", false);
+		print(anim.GetBool("melee"));
 	}
 
 
-		/*if(Input.touches.Length <=0)
-		{
-		}
-		else
-		{
-			for(int i = 0;i < Input.touchCount;i++)
-			{
-			
-					if(Input.GetTouch(i).phase == TouchPhase.Began)
-					{
-						Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-						RaycastHit hit = new RaycastHit();
-						aim = Physics.Raycast (ray, out hit);
-						print(aim);
-						//aim = true;
-						anim.SetBool ("IsAiming", aim);
-						
-						
-						
-						
 
-					}
 
-				if((Input.GetTouch(i).phase == TouchPhase.Ended))
-				{
-					aim = false;
-					anim.SetBool ("IsAiming", aim);
-					print(aim);
-				}
-
-			}
-		}*/
-					
 void lookat()
 	{
 		int tapCount = Input.touchCount;
