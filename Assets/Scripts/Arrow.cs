@@ -8,6 +8,16 @@ public class Arrow : MonoBehaviour {
 	float time;
 	public float lifetime;
 	public bool forceenabled;
+	public int damageamount;
+	RaycastHit enemyhit;
+	Ray enemyray;
+
+
+	void Awake()
+	{
+
+	
+	}
 	// Use this for initialization
 	void Start () 
 	{
@@ -35,11 +45,25 @@ public class Arrow : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collision)
 	{
-		//print ("calling");
 		if (collision.gameObject.tag == "Enemy")
 		{
-			print ("hit enemy");
-			Destroy(gameObject);
+
+
+			enemyray.origin = transform.position;
+			enemyray.direction = transform.forward;
+
+			if(Physics.Raycast(enemyray,out enemyhit))
+			{
+				print ("hit enemy");
+				EnemyHealth enemyhealth = enemyhit.collider.GetComponent<EnemyHealth>();
+				if(enemyhealth != null)
+				{
+					print("calling takehealth func");
+					enemyhealth.TakeHealth(damageamount,true);
+				}
+				Destroy(gameObject);
+			}
+
 
 		}
 	

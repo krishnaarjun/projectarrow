@@ -64,9 +64,9 @@ MonoBehaviour:
   activeRegion:
     serializedVersion: 2
     x: .499844849
-    y: .197431713
+    y: .500802517
     width: .500155151
-    height: .802568316
+    height: .499197513
   centeredPositionOffset: {x: 0, y: 0}
   _id: Fire
 --- !u!114 &11440878
@@ -104,7 +104,7 @@ MonoBehaviour:
     x: .497452199
     y: 0
     width: .502547801
-    height: .151685357
+    height: .491974294
   centeredPositionOffset: {x: 0, y: 0}
   _id: Melee
 --- !u!1001 &100100000

@@ -7,13 +7,20 @@ public class ZombieAI : MonoBehaviour {
 
 	public NavMeshAgent navmesh;
 
+	EnemyHealth enemyhealth;
 
-	void Awaker()
+	PlayerHealth playerhealth;
+
+	void Awake()
 	{
 
-		//Player = GameObject.FindGameObjectWithTag ("player").transform;
+		Player = GameObject.FindGameObjectWithTag ("Player").transform;
 
 		navmesh = GetComponent <NavMeshAgent> ();
+
+		enemyhealth = GetComponent<EnemyHealth> ();
+
+		playerhealth = Player.GetComponent<PlayerHealth> ();
 	}
 
 	// Use this for initialization
@@ -23,9 +30,16 @@ public class ZombieAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () 
-	{
-		navmesh.SetDestination (Player.position);
-
+	{	
+		int currenthealth = PlayerHealth.curhealth;
+		if (enemyhealth.curhealth > 0 && currenthealth > 0) 
+		{
+			navmesh.SetDestination (Player.position);
+		} 
+		else 
+		{
+			navmesh.enabled = false;
+		}
 	}
 
 

@@ -103,8 +103,8 @@ MonoBehaviour:
   topPartLayer: 1
   basePart: {fileID: 11400006}
   topPart: {fileID: 11400004}
-  recenterBaseOnRelease: 2
-  recenterBaseMethodValue: .64200002
+  recenterBaseOnRelease: 0
+  recenterBaseMethodValue: 0
   scale: .0799999982
 --- !u!114 &11400002
 MonoBehaviour:

@@ -15,7 +15,7 @@ public class AttackAI : MonoBehaviour {
 
 	void Awake()
 	{
-	
+		player = GameObject.FindGameObjectWithTag ("Player");
 		anim = GetComponent <Animator> ();
 		playerhealth = player.GetComponent<PlayerHealth> ();
 		nav = GetComponent<NavMeshAgent> ();
@@ -38,12 +38,13 @@ public class AttackAI : MonoBehaviour {
 
 	void Update () 
 	{
+		int chealth = PlayerHealth.curhealth;
 		timer += Time.deltaTime;
-		if (timer > fireinterval && inrange == true && playerhealth.curhealth != 0) 
+		if (timer > fireinterval && inrange == true && PlayerHealth.curhealth != 0) 
 		{
 			attack();		
 		}
-		else if (playerhealth.curhealth == 0)
+		else if (chealth <= 0)
 		{
 			anim.SetTrigger("playerdead");
 			nav.enabled = false;
@@ -59,7 +60,8 @@ public class AttackAI : MonoBehaviour {
 
 	void attackevent(float a)
 	{
-		if (playerhealth.curhealth > 0) 
+		int cuhealth = PlayerHealth.curhealth;
+		if (cuhealth > 0) 
 		{
 			playerhealth.takehealth (damageamount);
 		}

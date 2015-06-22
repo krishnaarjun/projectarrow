@@ -3,15 +3,16 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-	public Transform arrow;
+	public GameObject arrow;
 	public Transform muzzlepoint = null;
 	public float waittime = 2.5f;
 	protected bool iswaiting = false;
 	public bool button;
 	public GameObject player;
-
+	Collider collider;
 	public float rotspeed = 6f;
 	public float speed = 6f;    
+	public int meleeamount;
 	Vector3 movement;  
 	Animator anim;
 	Rigidbody playerRigidbody;          
@@ -19,13 +20,10 @@ public class PlayerMovement : MonoBehaviour {
 	float camRayLength = 1000f;    
 	Ray camRay;
 	bool aim;
+	GameObject enemy;
+	int i=1;
+	bool inrange;
 
-	void OnDrawGizmosSelected()
-	{
-		Gizmos.color = Color.red;
-		Gizmos.DrawRay(camRay.origin,camRay.direction * 10);
-
-	}
 	void Awake ()
 	{
 		floorMask = LayerMask.GetMask ("Floor");
@@ -41,21 +39,30 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 	
-	
-	void FixedUpdate ()
-	{
-	
-		//Turning ();
-		//lookat ();
-
-	}
-
 	void Update()
 	{
 		readjoy ();
 		getinput ();
 	
+		//print("you have meleed"+i+"Zombies");
+	}
 
+	/*void OnTriggerEnter(Collider coll)
+	{	
+		if (coll.gameObject.tag == "Enemy")
+		{	
+			inrange = true;
+			print ("enemy entered");
+			GameObject enemyobj = coll.gameObject;
+			enemy = enemyobj;
+
+		}
+		i++;
+	}*/
+
+	void OnTriggerExit(Collider co)
+	{
+		inrange = false;
 	}
 
 	void readjoy()
@@ -195,10 +202,26 @@ public class PlayerMovement : MonoBehaviour {
 
 	void reset(float b)
 	{
-		print ("calling");
 		anim.SetBool ("melee", false);
-		print(anim.GetBool("melee"));
 	}
+
+	/*void meleeattack(float c) 
+	{	
+		if (inrange)
+		{
+			EnemyHealth enemyhealth = enemy.GetComponent<EnemyHealth> ();
+			if (enemyhealth != null) 
+			{
+
+				if (enemyhealth.curhealth > 0)
+				{
+						enemyhealth.TakeHealth (meleeamount);
+				}
+			}
+		}
+
+
+	}*/
 
 
 

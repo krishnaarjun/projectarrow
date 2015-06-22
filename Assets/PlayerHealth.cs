@@ -5,7 +5,7 @@ using System.Collections;
 public class PlayerHealth : MonoBehaviour {
 
 	public int maxhealth = 100;
-	public int curhealth = 100;
+	public static int curhealth = 100;
 	bool isdead;
 	public Slider healthbar;
 	public Animator anim;
@@ -17,15 +17,14 @@ public class PlayerHealth : MonoBehaviour {
 	public Color flashcolor = new Color(1f,0f,0f,0.1f);
 	public Color fadecolor = new Color (0f, 0f, 0f, 0.1f);
 	public Text gameover;
-	ZombieAI zombieai;
-	public GameObject zombie;
+
 	bool flash;
 
 	void Awake()
 	{
 		anim = GetComponent<Animator> ();
 		playermovement = GetComponent<PlayerMovement> ();
-		zombieai = zombie.GetComponent<ZombieAI> ();
+
 
 	}
 	// Use this for initialization
@@ -60,6 +59,7 @@ public class PlayerHealth : MonoBehaviour {
 		if (collision.gameObject.tag == "Enemy") 
 		{
 			print ("hit");
+
 		}
 	}
 
@@ -71,7 +71,7 @@ public class PlayerHealth : MonoBehaviour {
 
 		healthbar.value = curhealth;
 
-		if (curhealth == 0 && !isdead) 
+		if (curhealth <= 0 && !isdead) 
 		{
 			death();
 		}
@@ -79,6 +79,7 @@ public class PlayerHealth : MonoBehaviour {
 
 	void death()
 	{
+
 
 		isdead = true;
 
@@ -100,7 +101,9 @@ public class PlayerHealth : MonoBehaviour {
 
 		playermovement.enabled = false;
 
-		zombieai.enabled = false;
+
+
+
 
 
 	}
