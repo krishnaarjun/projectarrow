@@ -22,6 +22,6 @@ public class Manager_Score : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		thetext.text = "SCORE : " + curscore;
+		thetext.text = "\n SCORE : " + curscore;
 	}
 }
