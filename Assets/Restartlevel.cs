@@ -12,9 +12,11 @@ public class Restartlevel : MonoBehaviour {
 
 	}
 
-	public void RestartScene()
+	IEnumerator RestartScene()
 	{
 		print ("restarting");
+		float Fadetime = GameObject.Find ("FadeLevel").GetComponent<Fading> ().BeginFade (1);
+		yield return new WaitForSeconds (Fadetime);
 		Application.LoadLevel (0);
 	}
 }

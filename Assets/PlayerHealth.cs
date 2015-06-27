@@ -44,10 +44,12 @@ public class PlayerHealth : MonoBehaviour {
 	{
 		if (flash) {
 			flashimg.color = flashcolor;
+			Handheld.Vibrate();
 		} 
 		else 
 		{
 			flashimg.color = Color.Lerp(flashimg.color,Color.clear ,fspeed * Time.deltaTime);
+
 		}
 		flash = false;
 	

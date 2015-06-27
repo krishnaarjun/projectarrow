@@ -72,6 +72,12 @@ public class EnemyHealth : MonoBehaviour {
 		zombieai.navmesh.enabled = false;  
 
 		Manager_Score.curscore += myscoreval;
+
+		if (Manager_Score.curscore > PlayerPrefs.GetInt ("HighScore")) 
+		{
+			PlayerPrefs.SetInt("HighScore", Manager_Score.curscore);
+		}
+
 	}
 
 	void destroyevent(int q)

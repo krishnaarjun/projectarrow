@@ -23,12 +23,17 @@ public class GameOver : MonoBehaviour {
 	void Update () 
 	{
 		if (PlayerHealth.curhealth <= 0) 
-		{
+		{	
+			int finalscore = Manager_Score.curscore;
+			if(finalscore > PlayerPrefs.GetInt("HighScore"))
+			{
+				PlayerPrefs.SetInt("HighScore",finalscore);
+			}
 			anim.SetTrigger("GameOver");
 			timer +=Time.deltaTime;
 			if(timer > restarttime)
 			{
-				Application.LoadLevel(1);
+				Application.LoadLevel(2);
 			}
 		}
 	}
